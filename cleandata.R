@@ -1,8 +1,24 @@
 options(rpubs.upload.method = "internal")
-install.packages('ggplot2')
-library(ggplot2)
-require(ggplot2)
+# Setup packages ---------------------------------------------------------------
+# List of packages for session
+.packages = c("devtools", 
+              "stringr", 
+              "dplyr", 
+              "ggplot2", 
+              "knitr", 
+              "markdown") 
 
+# Install CRAN packages (if not already installed)
+.inst <- .packages %in% installed.packages()
+if(length(.packages[!.inst]) > 0) install.packages(.packages[!.inst])
+
+# Load packages into session 
+lapply(.packages, require, character.only=TRUE)
+cat("\014")  # Clear console
+
+# General setup ----------------------------------------------------------------
+rm(list=ls()) # Delete all existing variables
+graphics.off() # Close all open plots
 # Set directory
 #setwd("C:/Users/bergmc/Documents/cb/datakind/cta")
 
